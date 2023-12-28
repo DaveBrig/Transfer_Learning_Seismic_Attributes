@@ -155,8 +155,7 @@ def Umap_vis(proc_dfs, meta_dfs, var, clr_list):
     # Create the figure and add the scatter trace
     fig = go.Figure(data=[scatter], layout=layout)
 
-    # Show the plot
-    fig.show()
+    return fig
 
 # Function for implementing Louvain clustering
 def clusters(umap_obj, var, proc_dfs):
@@ -234,5 +233,4 @@ def Umap_vis_alternative(df, var):
     # Create the figure and add the scatter trace
     fig = go.Figure(data=[scatter], layout=layout)
 
-    # Show the plot
-    fig.show()
+    return fig
