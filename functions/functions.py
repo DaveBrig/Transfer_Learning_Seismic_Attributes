@@ -11,6 +11,11 @@ from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 import numpy as np
 from sknetwork.clustering import Louvain
+from xgboost import XGBClassifier
+import shap
+from sklearn.metrics import roc_curve, auc
+from sklearn.metrics import roc_auc_score
+from imblearn.under_sampling import RandomUnderSampler
 
 # Functions for Dimension Reduction and Unsupervised ML
 
@@ -234,3 +239,110 @@ def Umap_vis_alternative(df, var):
     fig = go.Figure(data=[scatter], layout=layout)
 
     return fig
+
+# Function to remove redundant columns
+def remove_columns(data):
+    
+    for df in data:
+        data[df] = data[df].drop(['class', 'clusters', 'Cp_Product', 'reordered_cluster'], axis=1)
+    
+    return data
+
+# Function to create class labels
+def get_classes(df, gas, nogas, n_gas, n_nogas):
+    
+    # get the geometry column
+    df = gpd.GeoDataFrame(df, geometry='geometry')      
+   
+    # standardise the crs
+    df.set_crs(gas.crs, inplace=True)
+
+    # Check if each point is within the gas polygon
+    df['gas'] = df['geometry'].within(gas.iloc[n_gas].geometry).astype(int)
+
+    # Check if each point is within the nogas polygon
+    df['nogas'] = df['geometry'].within(nogas.iloc[n_nogas].geometry).astype(int)
+
+    # Assign values 1 and 2 based on the within_gas and within_nogas columns
+    df['class'] = df['gas'] + (2 * df['nogas'])
+
+    # drop redundant columns
+    df = df.drop(['gas', 'nogas'], axis=1)     
+  
+    return df
+
+# Function to create the train/test sets, undersample, run classification and produce metrics
+def train_val(training_set, test_set, rus):
+    
+    # create the training and test sets
+    X_train = training_set.drop(['geometry', 'test','train'], axis=1)
+    y_train = training_set['train']
+
+    # replace y values
+    y_train = y_train.replace(2, 0)
+
+    X_test = test_set.drop(['geometry', 'train', 'test'], axis=1)
+    y_test = test_set['test']
+
+    # replace y values
+    y_test = y_test.replace(2, 0)
+    
+    # perform random undersampling
+    X_strat, y_strat = rus.fit_resample(X_train, y_train)
+    
+    # define the classifier
+    xgb = XGBClassifier()
+
+    # train the model
+    xgb.fit(X_strat, y_strat)
+    
+    # test the model
+    y_pred_test= xgb.predict(X_test)    
+    y_array = np.array(y_test)
+    
+    # get the performance on the first validation scenario
+    roc = roc_auc_score(y_array, y_pred_test)
+    
+    ### PERFORM THE ALTERNATIVE VALIDATION SCENARIO ###
+    
+    # perform random undersampling for the next validation scenario
+    X_strat1, y_strat1 = rus.fit_resample(X_test, y_test)
+    
+    # define the alternative classifier
+    xgb1 = XGBClassifier()
+
+    # train the model with Geographe and Thistle training set
+    xgb1.fit(X_strat1, y_strat1)
+    
+    # test the model
+    y_pred_test1 = xgb1.predict(X_train)    
+    y_array1 = np.array(y_train)
+    
+    # get the performance on the first validation scenario
+    roc1 = roc_auc_score(y_array1, y_pred_test1)     
+    
+    ### PRODUCE THE VALIDATION CURVES
+    
+    y_pred_prob1 = xgb.predict_proba(X_test)[:, 1]
+    y_pred_prob2 = xgb1.predict_proba(X_train)[:, 1]
+
+    fpr1, tpr1, _ = roc_curve(y_test, y_pred_prob1)
+    fpr2, tpr2, _ = roc_curve(y_train, y_pred_prob2)
+
+    roc_auc1 = auc(fpr1, tpr1)
+    roc_auc2 = auc(fpr2, tpr2)
+
+    # Plot the ROC curves on the same chart
+    plt.figure(figsize=(8, 6))
+    plt.plot(fpr1, tpr1, color='b', lw=2, label=f'Xgb Thylacine/Geographe North (AUC = {roc_auc1:.2f})')
+    plt.plot(fpr2, tpr2, color='g', lw=2, label=f'Xgb Geographe/Thistle (AUC = {roc_auc2:.2f})')
+    plt.plot([0, 1], [0, 1], color='gray', lw=2, linestyle='--')
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('ROC Curves')
+    plt.legend(loc='lower right')
+    plt.show()  
+    
+    return (xgb, xgb1, roc, roc1, plt)
