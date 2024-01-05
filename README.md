@@ -8,9 +8,9 @@ To demonstrate, we applied three different treatments to a geophysical image. Ea
 
 For this example we created an attribute extracted from a 3D Marine Seismic data. Seismic data is an ideal dataset for analysing textural variations in geology. Different rock types have different densities, and sound waves emitted by seismic surveys travel through different rock types at different velocities. Together variations in rock density and seismic velocity cause changes in acoustic impedance which manifests as changes in reflectivity in seismic data. Such changes in reflectivity can help to distinguish between different rock types.      
 
-We picked the 'Top of Thylacine' horizon on the Investigator 3D Marine Seismic Survey (MSS), and used the interpretation to create a surface. The Thylacine member represents a regional interface between thick Cretaceous aged marine claystones and the underlying shore-face sandstones. It is the top of a regional reservoir horizon that hosts significant gas resources in offshore Victoria. 
+We picked the 'Top of Thylacine' horizon on the Investigator 3D Marine Seismic Survey (MSS), and used the interpretation to create a surface. The Thylacine member represents a regional interface between thick Cretaceous aged marine claystones and the underlying shore-face sandstones. It is the top of a regional reservoir horizon that hosts significant gas resources in offshore Victoria. The Top of Thylacine TWT surfaces is shown in the figure below.  
 
-![Location](.images/Location_map.png)
+![Location](images/Location_map.png)
 
 The interface of the Top of Thylacine surface causes a strong impedance contrast and is clearly discernible in seismic imagery. To generate a textural representation of the reservoir section beneath this surface, the Incoherence attribute was calculated. This attribute is ideal for quantifying and visualising changes in texture likely attributed to changes in facies. Is is derived by quantifying the difference between neighbouring traces. Similar traces have a values of near zero and high values represent traces that are dissimilar. The attribute can therefore highlight boundaries between different rock types and/or faults. https://help.dugeo.com/m/Insight/l/438797-incoherence 
 
