@@ -12,7 +12,7 @@ We picked the 'Top of Thylacine' horizon on the Investigator 3D Marine Seismic S
 
 ![Location](images/Location_map.png)
 
-The interface at the Top of Thylacine surface causes a strong impedance contrast and is clearly discernible in seismic imagery. To generate a textural representation of the shore-face sandstones known to be present beneath this surface, the Incoherence attribute was calculated. This attribute is ideal for visualising changes in texture caused by differing facies or the presence of faults. The Incoherence attribute is derived by quantifying the difference between neighbouring traces (DUG Insight User Manual, n.d.). Similar traces have a values of or near zero and high values represent traces that are dissimilar. The attribute can therefore highlight boundaries between different rock types and/or faults. In the cross-section shown below the consistently high amplitude reflections beneath the Top of the Thylacine surface (labelled 'Top Porosity') indicates a contiguous sand body. However, to the left of the section, this character gives way to lower amplitude and inconsistent reflections which probably represent a change to marine mudstone deposited on the paleo continental slope, out-board of the marine shelf. 
+The interface at the Top of Thylacine surface causes a strong impedance contrast and is clearly discernible in seismic imagery. To generate a textural representation of the shore-face sandstones known to be present beneath this surface, the Incoherence attribute was calculated within a search window of 50 millisenconds beneath the Top of Thylacine horizon. This attribute is ideal for visualising changes in texture caused by differing facies or the presence of faults. The Incoherence attribute is derived by quantifying the difference between neighbouring traces (DUG Insight User Manual, n.d.). Similar traces have values near to zero while high values represent traces that are dissimilar. The attribute can therefore highlight boundaries between different rock types and/or faults. In the cross-section shown below the consistently high amplitude reflections beneath the Top of the Thylacine surface (labelled 'Top Porosity') indicates a contiguous sand body. However, to the left of the section, this character gives way to lower amplitude and inconsistent reflections which probably represent a change to marine mudstone on the paleo continental slope deposited out-board of the sand dominated marine shelf. 
 
 ![Section](images/Geograph.png)
 
@@ -20,7 +20,7 @@ For this experiment three different treatments were applied to the Incoherence a
 
 1. Rendered as a single-band greyscale image
 2. A 'Viridis' colour bar applied, colour scale truncated to a range of 0-0.1, and the resulting image rendered as a multi-band RGB
-3. Finally, to enhance texture a multi-directional hillshade was applied to the coloured image. This has the effect of enhancing the high Incoherence zones which could represent boundaries between rock types or faults.
+3. Finally, to enhance texture a multi-directional hillshade was applied to the coloured rgb image. This has the effect of enhancing the high Incoherence zones which could represent boundaries between rock types or faults.
 
 ![Section](images/Incoherence.png)
 
@@ -30,15 +30,15 @@ To conduct a textural analysis of each of the alternative geophysical images, a 
 
 To perform feature extraction, each of the geophysical image variations were split into a series of 3265 individual 600x600m tiles. Each of the image tiles were then passed through the pre-trained ResNet50 architecture. Before allowing the architecture to proceed to the final layer and perform classification, the features were extracted from the penultimate layer. Each of the 2064 features are numerical representations of textural information for each of the image tiles. Assuming that the features are of good quality, these can be used to quantify differences between the image tiles based on texture. 
 
-The feature extraction process has transformed each image tile into a multi-dimensional dataset. These multi-dimensional datasets will be used to compare the three image variations based on the the textural information extracted.     
+The feature extraction process has transformed each image tile into a multi-dimensional dataset. These multi-dimensional datasets will be used to compare the three image variations based on the the textural information extracted by the pre-trained network.     
 
 ## Dimension Reduction
 
 To compare the feature sets between the geophysical images, a process of dimension reduction followed by clustering was performed. The objective was to determine firstly whether textural domains can be distinguished from each of the image variations, and then which of the variations provide the best representation of the sub-surface and are therefore most useful for distinguishing geological domains.  
 
-For dimension reduction each of the feature sets were scaled using the python Standard Scalar, before applying Principal Component Analysis (PCA) followed by Uniform Manifold and Projection (UMAP) to reduce each of the feature sets to three components.   
+For dimension reduction each of the feature sets were scaled using the python Standard Scalar, before applying Principal Component Analysis (PCA) and finally Uniform Manifold and Projection (UMAP) to reduce each of the feature sets to three components.   
 
-As can be seen below, each of the UMAP representations are slightly different, indicating a difference in the ability for the extracted feature sets to distinguish between textural domains. To assist with comparisons, all tiles that fall within the Thylacine gas field are coloured in purple and those proximal to the dry well Geographe North-1 are highlighted in red. The objective of this experiment is not to predict hydrocarbon distribution, but since gas is known to be reservoired within sands of the Thylacine member, this visualisation can assist with identifying textural domains that are associated with shallow marine sands.
+As can be seen below, each of the UMAP representations are slightly different, indicating a difference in the ability for the extracted feature sets to distinguish between textural domains. To assist with comparisons, all tiles that fall within the Thylacine gas field are coloured in purple and those proximal to the dry well Geographe North-1 are highlighted in red. The objective of this experiment is not to predict hydrocarbon distribution, but since the gas is known to be reservoired within shallow marine sands of the Thylacine member, this visualisation can assist with identifying textural domains that are consistent with this facies. 
 
 ![Section](images/UMAP.png)
 
@@ -52,11 +52,14 @@ In the visualisation below, the clusters have been re-ordered based on the locat
 
 The yellow coloured cluster from all of the feature sets seem to capture the reservoir sands at Thylacine and perhaps highlight other similar unclassified sands. However, it is difficult to fully assess the differences between feature sets until the clusters can be visualised and compared spatially. 
 
-Below is a visualisation of each cluster set across the Investigator 3D survey area. The clusters associated with the Greyscale image seem to highlight the known gas fields at Thylacine, Geographe and Artisan indicating that the features derived from this image would probably perform well in a hydrocarbon classification model. However, the cluster sets associated with the coloured RGB and hillshaded images seem to exhibit more coherent geological bodies. The brightest colours of the clusters associated with the hillshaded image seem to conform well with low Incoherence zones, providing a plausible representation of the marine shelf sands known to exist across the survey area. Of the three feature sets, these clusters also show the clearest distinction between textural domains and probably geological features. 
+Below is a visualisation of each cluster set across the Investigator 3D survey area. The clusters associated with the Greyscale image seem to highlight the known gas fields at Thylacine, Geographe and Artisan indicating that the features derived from this image would probably perform well in a hydrocarbon classification model. However, the cluster sets associated with the coloured RGB and hillshaded images seem to exhibit more coherent geological bodies. The brightest colours of the clusters associated with the hillshaded image seem to conform well with low Incoherence zones, providing a plausible representation of the marine shelf sands known to exist across the survey area. Of the three feature sets, these clusters also show the clearest distinction between textural domains and probable geological features. 
 
-These observations indicate that enhancing the high incoherence textures using a multi directional hillshade has facilitated the feature extraction process to discriminate textural domains more clearly. This shows that the feature extraction process can be optimised if subject matter experts take steps to enhance textures associated with desired geological targets.    
+These observations show that adjusting the appearance of a geophysical image can strongly affect the features extracted by a pre-trained CNN. Enhancing texture associated with high Incoherence using a multi directional hillshade has facilitated the feature extraction process to discriminate textural domains more clearly. This implies that the feature extraction process can be optimised if subject matter experts first take steps to enhance textures associated with desired geological targets.    
 
 ![Section](images/maps.png)
+
+## Acknowledgments
+Thankyou to 3D Energi Limited for providing the Investigator 3D MSS dataset and assisting with producing seismic attributes for the purpose of this experiment.  
 
 ## References
 D.C.B. Cliff, S.C. Tye & Taylor R, (2004). The Thylacine and Geographe gas discoveries, offshore eastern Otway Basin. APPEA Journal. 44. 441-461. 10.1071/AJ03017. 
