@@ -92,7 +92,7 @@ def preprocess_pipeline(directory_path, var_exp, nn, md, gas, nogas):
             df_meta2 = get_classes(df_meta, gas, nogas, 0, 0)
             
             # append metadata dfs
-            meta_dfs[filename_without_extension] = df_meta
+            meta_dfs[filename_without_extension] = df_meta2
             
             # Initialize the StandardScaler
             scaler = StandardScaler()            
