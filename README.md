@@ -12,7 +12,9 @@ We picked the 'Top of Thylacine' horizon on the Investigator 3D Marine Seismic S
 
 ![Location](images/Location_map.png)
 
-The interface of the Top of Thylacine surface causes a strong impedance contrast and is clearly discernible in seismic imagery. To generate a textural representation of the reservoir section beneath this surface, the Incoherence attribute was calculated. This attribute is ideal for quantifying and visualising changes in texture likely attributed to changes in facies. Is is derived by quantifying the difference between neighbouring traces. Similar traces have a values of near zero and high values represent traces that are dissimilar. The attribute can therefore highlight boundaries between different rock types and/or faults. https://help.dugeo.com/m/Insight/l/438797-incoherence 
+The interface of the Top of Thylacine surface causes a strong impedance contrast and is clearly discernible in seismic imagery. To generate a textural representation of the shore-face sandstones known to be present beneath this surface, the Incoherence attribute was calculated. This attribute is ideal for visualising changes in texture caused by differing facies or the presence of faults. The attribute is derived by quantifying the difference between neighbouring traces (DUG Insight User Manual, n.d.). Similar traces have a values of or near zero and high values represent traces that are dissimilar. The attribute can therefore highlight boundaries between different rock types and/or faults. In the figure shown below the consistently high amplitude reflections beneath the Top of the Thylacine surface (labelled 'Top Porosity') indicate a consistent distribution of sands. However, to the left of the section, this character gives way to lower amplitude and inconsistent reflections which probably represent a change to marine mudstone deposited out-board of the marine shelf on the paleo continental slope. 
+
+![Section](images/Geograph.png)
 
 For this experiment three different treatments were applied to the Incoherence attribute. 
 
@@ -43,6 +45,9 @@ As can be seen below, each of the UMAP representations are slightly different, i
 After dimension reduction, the Louvain clustering method was implemented in an attempt to distinguish between textural domains. In the visualisation below, the clusters have been re-ordered based on the location of the cluster in UMAP space. Clusters associated with the gas bearing reservoir quality sands have the warmest colour, while those most distant from the gas bearing sands in UMAP space have the coolest colours. 
 
 All of the feature sets seem to have clusters that capture the reservoir sands at Thylacine, but it is difficult to fully assess the differences until the clusters can be visualised and compared spatially. Below is a visualisation of each cluster set across the Investigator survey area. As can be seen, the clusters associated with the Greyscale image seem to be less coherent than the others and do not seem to represent natural geological bodies. The features might be highly effective at detecting gas bearing sands at Thylacine, but would be less successful at the Geographe and Artisan fields. In contrast, the cluster set associated with the coloured RGB image seems to exhibit more coherent geological bodies, but the coloured and hillshaded image shows by far the most coherent geological form. It shows clear boundaries between what is likely sands deposited on the marine shelf with an outboard facies that could represent marine slope muds.
+
+## References
+DUG Insight User Manual, n.d. https://help.dugeo.com/m/Insight/l/438797-incoherence 
 
 
 
