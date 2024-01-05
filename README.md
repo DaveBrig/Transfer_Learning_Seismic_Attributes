@@ -1,16 +1,20 @@
-# Transfer_Learning_Seismic_Attributes
+# Transfer Learning with Seismic Attributes
 
-In this post we demonstrate how the style and quality of input imagery can affect the results of computer vision modelling. The intention is to demonstrate that the type of treatment applied to geophysical imagery can have a profound impact on computer vision models that rely on texture to make predictions. 
+In this post we demonstrate that while computer vision methods are a powerful means for extracting important geological information from geophysical imagery, subject matter expertise is crucial when preparing the images for analysis. Since computer vision methods are highly sensitive to textural variation, subject matter experts should carefully consider how image preparation intends to enhance or alternatively dampen geological features that are of interest. 
 
-To demonstrate, we applied three different treatments to a geophysical image. Each of these images were subjected to the same transformations and feature extraction pipeline. The resulting features were then passed through a consistent dimension reduction and clustering process. The results show that preparation of an image has a profound impact on the quality of extracted features. Therefore care should be taken when preparing geophysical imagery before computer vision modelling. Subject matter experts should carefully consider how image preparation intends to enhance or alternatively dampen geological features that are of interest.   
+To demonstrate, we applied three different treatments to a geophysical image. Each of these images were subjected to the same transformations and feature extraction pipeline. The resulting features were then passed through a dimension reduction and clustering process. The results show that preparation of an image has a profound impact on the quality of extracted features. 
 
 ## Image Preparation
 
-For this example we used an attribute extracted from a 3D Marine Seismic Survey. Seismic data is an ideal dataset for analysing changes in texture. Variations in rock type and therefore rock property with depth, causes changes in velocity and therefore changes in 'reflectivity' and appearance of seismic reflectors.
+For this example we created an attribute extracted from a 3D Marine Seismic data. Seismic data is an ideal dataset for analysing textural variations in geology. Different rock types have different densities, and sound waves emitted by seismic surveys travel through different rock types at different velocities. Together variations in rock density and seismic velocity cause changes in acoustic impedance which manifests as changes in reflectivity in seismic data. Such changes in reflectivity can help to distinguish between different rock types.      
 
-In this case we picked the 'Top of Thylacine' surface which represents a regional interface between thick Cretaceous aged marine claystones and the underlying shore-face sandstones. The boundary between these layers causes a strong impedance contrast and is clearly discernible in seismic imagery (). The Incoherence attribute is ideal for quantifying and visualising changes in texture likely attributed to changes in facies across this surface. Is is calculated by quantifying the difference between neighbouring traces. Similar traces will have a values of near zero while those that are different will have a much higher value. The attribute can therefore highlight boundaries between different rock types and/or faults.  
+We picked the 'Top of Thylacine' horizon on the Investigator 3D Marine Seismic Survey (MSS), and used the interpretation to create a surface. The Thylacine member represents a regional interface between thick Cretaceous aged marine claystones and the underlying shore-face sandstones. It is the top of a regional reservoir horizon that hosts significant gas resources in offshore Victoria. 
 
-For this experiment three different treatments were applied to the attribute. 
+![Location](.images/Location_map.png)
+
+The interface of the Top of Thylacine surface causes a strong impedance contrast and is clearly discernible in seismic imagery. To generate a textural representation of the reservoir section beneath this surface, the Incoherence attribute was calculated. This attribute is ideal for quantifying and visualising changes in texture likely attributed to changes in facies. Is is derived by quantifying the difference between neighbouring traces. Similar traces have a values of near zero and high values represent traces that are dissimilar. The attribute can therefore highlight boundaries between different rock types and/or faults. https://help.dugeo.com/m/Insight/l/438797-incoherence 
+
+For this experiment three different treatments were applied to the Incoherence attribute. 
 
 1. Rendered as a single-band greyscale image
 2. Colours truncated to a range of 0-0.1, the 'Viridis' colour bar was applied and the image rendered as a multi-band RGB
