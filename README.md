@@ -55,9 +55,11 @@ All of the feature sets seem to have clusters that capture the reservoir sands a
 ![Section](images/maps.png)
 
 ## References
+D.C.B. Cliff, S.C. Tye & Taylor R, (2004). The Thylacine and Geographe gas discoveries, offshore eastern Otway Basin. APPEA Journal. 44. 441-461. 10.1071/AJ03017. 
+
 DUG Insight User Manual, n.d. https://help.dugeo.com/m/Insight/l/438797-incoherence 
 
-ImageNet, 2021, https://www.image-net.org/update-mar-11-2021.php
+ImageNet, (2021), https://www.image-net.org/update-mar-11-2021.php
 
 Lu. H, Halappanavar. M & Kalyanaraman. A (2014),Parallel Heuristics for Scalable Community Detection. Parallel Computing: SI: Scientific graph analysis
 
