@@ -209,7 +209,7 @@ def Umap_vis_alternative(df, var):
     classes = df['reordered_cluster']  # Assuming 'classes' is the name of the column
 
     # Define the custom color list for each class
-    colorscale = 'rainbow'  # Choose a desired colorscale
+    colorscale = 'viridis_r'  # Choose a desired colorscale
 
     scatter = go.Scatter3d(
         x=column1,
