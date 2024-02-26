@@ -8,7 +8,7 @@ For this demonstration, we applied three different treatments to an example geop
 
 We created an attribute extracted from a 3D marine seismic data which is ideal for analysing textural variations in geology. Different rock types have different densities, and sound waves emitted during seismic acquisition travel through them at different velocities. Together variations in rock density and seismic velocity cause changes in acoustic impedance which manifest as changes in reflectivity in seismic data. Such variation in reflectivity can help interpreters to visually identify boundaries between seismic facies which often represent transitions between rock types.      
 
-We picked the 'Top of Thylacine' horizon on the Investigator 3D Marine Seismic Survey (MSS), and used the interpretation to create a surface. The Thylacine member represents a regional interface between thick Cretaceous aged marine claystones and underlying deltaic sandstones. It is the top of a regional reservoir horizon that hosts significant gas resources in offshore Victoria. The Top of Thylacine two-way-time (TWT) structure is shown in the figure below.  
+We picked the 'Top of Thylacine' horizon on the Investigator 3D Marine Seismic Survey (MSS), and used the interpretation to create a surface. The surface represents a regional interface between thick Cretaceous aged marine claystones and underlying deltaic sandstones. It is the top of a regional reservoir horizon that hosts significant gas resources in offshore Victoria. The Top of Thylacine two-way-time (TWT) structure is shown in the figure below.  
 
 ![Location](images/Location_map.png)
 
