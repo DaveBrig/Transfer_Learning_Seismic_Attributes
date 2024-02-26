@@ -1,6 +1,6 @@
 # Transfer Learning with Seismic Attributes
 
-This post demonstrates that subject matter expertise is crucial when preparing geophysical images for analysis with computer vision methods. Since these methods are highly sensitive to textural variation, subject matter experts should carefully consider how image preparation intends to enhance or alternatively dampen geological features that are of interest. 
+This post demonstrates that subject matter expertise is crucial when preparing geophysical images for analysis with computer vision methods. Since these methods are highly sensitive to textural variation, subject matter experts should carefully consider how image preparation intends to enhance or alternatively dampen texture that could relate to geology.  
 
 For this demonstration, we applied three different treatments to an example geophysical image. Each of these images were subjected to the same transformations and feature extraction pipeline. The features were then passed through a dimension reduction and clustering process. The results show that preparation of an image has a profound impact on the quality of extracted features and the resulting geological information to be gleaned. 
 
